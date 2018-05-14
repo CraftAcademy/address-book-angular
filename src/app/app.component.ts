@@ -6,5 +6,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  contact: any;
+  contacts: any[] = [];
+
+  constructor() {
+    this.initContact();
+  }
+
+  createContact() {
+    console.log(`Create the following contact: ${JSON.stringify(this.contact)}`);
+    this.contacts.push(this.contact);
+    this.initContact();
+  }
+
+  private initContact() {
+    this.contact = {
+      name: '',
+      email: '',
+      company: '',
+      role: '',
+      twitter: '',
+      location: '',
+      notes: ''
+    };
+  }
 }
