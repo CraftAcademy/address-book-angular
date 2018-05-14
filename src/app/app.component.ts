@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { IContact } from './contact/contact.model';
+
+import contacts from './contact/contacts-list';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  contact: any;
-  contacts: any[] = [];
+  contact: IContact;
+  contacts: IContact[] = [];
 
   constructor() {
     this.initContact();
-    this.initListOfContacts();
+    this.contacts = contacts;
   }
 
   createContact() {
@@ -30,40 +33,5 @@ export class AppComponent {
       location: '',
       notes: ''
     };
-  }
-
-  private initListOfContacts() {
-    this.contacts = [
-      {
-        name: 'Raoul Diffouo',
-        email: 'diraulo@craftacademy.se',
-        company: 'Craft Academy',
-        role: 'Coach',
-        twitter: 'diraulo',
-        location: 'Pretoria',
-        notes: 'Can be annoying sometimes? :thinking:',
-        image: 'https://avatars2.githubusercontent.com/u/4028374?s=40&v=4'
-      },
-      {
-        name: 'Magnus',
-        email: 'magnus@craftacademy.se',
-        company: 'Craft Academy',
-        role: 'Coach',
-        twitter: 'magnus',
-        location: 'Gothenburg',
-        notes: 'Awesome Guy',
-        image: ''
-      },
-      {
-        name: 'Faraz',
-        email: 'faraz@craftacademy.se',
-        company: 'Craft Academy',
-        role: 'Coach',
-        twitter: 'faraz',
-        location: 'Stockholm',
-        notes: 'FooBar',
-        image: ''
-      }
-    ];
   }
 }
