@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { IContact } from './contact/contact.model';
-
-import contacts from './contact/contacts-list';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,24 @@ export class AppComponent {
   contact: IContact;
   contacts: IContact[] = [];
 
-  constructor() {
+  constructor(private http: Http) {
     this.initContact();
-    this.contacts = contacts;
+
+    // Get contacts from the API
+    this.getContacts()
+      .subscribe(({ data }) => {
+        console.log(data);
+
+        this.contacts = data.map(contact => {
+          return contact.attributes;
+        });
+      });
+  }
+
+  getContacts() {
+    const apiUrl = 'https://ca-address-book.herokuapp.com/api/contacts';
+    return this.http.get(apiUrl)
+      .map((response: Response) => response.json());
   }
 
   createContact() {
